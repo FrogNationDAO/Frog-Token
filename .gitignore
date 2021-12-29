@@ -1,0 +1,24 @@
+# Ignore all dotfiles...
+.*
+# Except for
+!.editorconfig
+!.eslintignore
+!.eslintrc.js
+!.github
+!.gitignore
+!.mocharc.json
+!.prettierignore
+!.prettierrc.json
+!.solhint.json
+!.solhintignore
+# Node
+node_modules
+# Hardhat
+cache
+artifacts
+# Coverage
+coverage/
+coverage.json
+# Generate
+src/types
+deployments/ganache
