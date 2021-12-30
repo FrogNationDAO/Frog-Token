@@ -6,15 +6,8 @@ import 'hardhat-deploy'
 import 'hardhat-watcher'
 import 'hardhat-gas-reporter'
 import 'solidity-coverage'
-import {HardhatUserConfig, task} from 'hardhat/config'
-
-task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
-  const accounts = await hre.ethers.getSigners()
-
-  for (const account of accounts) {
-    console.log(account.address)
-  }
-})
+import {HardhatUserConfig} from 'hardhat/config'
+import './tasks'
 
 const accounts = {
   mnemonic: process.env.MNEMONIC || 'test test test test test test test test test test test junk',
@@ -34,7 +27,7 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       initialBaseFeePerGas: 0, // workaround from https://github.com/sc-forks/solidity-coverage/issues/652#issuecomment-896330136 . Remove when that issue is closed.
-      tags: ['local'],
+      tags: ['local', 'test'],
     },
     ganache: {
       url: 'http://127.0.0.1:7545',
@@ -48,7 +41,7 @@ const config: HardhatUserConfig = {
     },
     fantomTestnet: {
       url: 'https://rpc.testnet.fantom.network',
-      chainId: 0xFA2,
+      chainId: 4002,
       accounts: accounts,
       tags: ['testnet'],
     },
@@ -58,6 +51,11 @@ const config: HardhatUserConfig = {
     alice: 1,
     bob: 2,
     carol: 3,
+    treasure: {
+      default: 0,
+      250: '0x0A8e4d0a797697B49f9F6826d551d349c9B8dfFb',
+      4002: '0x0A8e4d0a797697B49f9F6826d551d349c9B8dfFb',
+    }
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
