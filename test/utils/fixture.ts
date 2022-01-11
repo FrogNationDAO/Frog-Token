@@ -1,7 +1,7 @@
 import {deployments, ethers, getNamedAccounts, waffle} from 'hardhat'
 import {Contract} from 'ethers'
 import {SignerWithAddress} from '@nomiclabs/hardhat-ethers/signers'
-import {FrogToken__factory, StakedFrogToken__factory} from '@/types'
+import {FrogToken__factory, StakedFrogToken__factory, WagMeToFrog__factory, WagMeToken__factory} from "@/types"
 
 export async function setup() {
   await deployments.fixture()
@@ -17,12 +17,16 @@ export async function setup() {
     treasure: treasureAddr,
   } = await getNamedAccounts()
 
+  const WagMeToken = await deployments.get('WagMeToken')
   const FrogToken = await deployments.get('FrogToken')
   const StakedFrogToken = await deployments.get('StakedFrogToken')
+  const WagMeToFrog = await deployments.get('WagMeToFrog')
 
   const contracts = {
+    wagMeToken: WagMeToken__factory.connect(WagMeToken.address, deployer),
     frogToken: FrogToken__factory.connect(FrogToken.address, deployer),
     stakedFrogToken: StakedFrogToken__factory.connect(StakedFrogToken.address, deployer),
+    wagMeToFrog: WagMeToFrog__factory.connect(WagMeToFrog.address, deployer),
   }
 
   const [owner, treasure, alice, bob, carol] = await setupUsers([
