@@ -53,8 +53,8 @@ const config: HardhatUserConfig = {
     carol: 3,
     treasure: {
       default: 0,
-      250: '0x0A8e4d0a797697B49f9F6826d551d349c9B8dfFb',
-      4002: '0x0A8e4d0a797697B49f9F6826d551d349c9B8dfFb',
+      250: '0x7Ea6E87789C40084030b2289C89fdA723Bd91117',
+      4002: '0x7Ea6E87789C40084030b2289C89fdA723Bd91117',
     }
   },
   etherscan: {
